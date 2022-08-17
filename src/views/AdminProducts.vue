@@ -1,7 +1,7 @@
 <template>
     <div v-if="products" class="prods">
    
-  <Card class="card"
+  <ProductCard class="card"
    v-for="product in products" 
    :key="product.product_id" 
    :product="product"/>
@@ -9,14 +9,14 @@
   </div>
 </template>
 <script>
-import Card from "../components/Card.vue";
+import ProductCard from "../components/ProductCard.vue";
 export default {
   computed: {
     products() {
       return this.$store.state.products
     },
   },
-  components: { Card },
+  components: { ProductCard },
   mounted() {
     this.$store.dispatch("getProducts");
   }

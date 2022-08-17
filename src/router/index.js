@@ -16,9 +16,44 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+  },
+  {
+    path: '/admin-users',
+    name: 'AdminUsers',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminUsers.vue')
+  },
+  {
+    path: '/admin-products',
+    name: 'AdminProducts',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminProducts.vue')
+  },
+  {
+    path: '/admin-products/:id',
+    name: 'AdminProductDetails',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AdminProductDetails.vue')
+  },
+  {
     path: '/products',
     name: 'Products',
     component: () => import(/* webpackChunkName: "about" */ '../views/Products.vue')
+  },
+  {
+    path: '/products/:id',
+    name: 'ProductDetails',
+    component: () => import(/* webpackChunkName: "about" */ '../views/ProductDetails.vue')
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
+  },
+  {
+    path: '/reset',
+    name: 'Reset',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Reset.vue')
   }
 ]
 

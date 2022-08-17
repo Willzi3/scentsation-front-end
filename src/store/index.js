@@ -4,9 +4,9 @@ export default createStore({
   state: {
     User: null,
     Token: null,
-    Product: null,
     cart: [],
     product: null,
+    products: null
   },
   mutations: {
     setUser: (state, user) => {
@@ -15,8 +15,11 @@ export default createStore({
     setToken: (state, token) => {
       state.token = token  ;
     },
-    setProduct(state, product) {
-      state.activeProduct = product
+    setProduct: (state, product) => {
+      state.product = product;
+    },
+    setProducts: (state, products) => {
+      state.products = products;
     },
     updateCart: (state, product) => {
 
@@ -74,15 +77,15 @@ export default createStore({
         alert(data)
       }
     },
-    signUp: async (context, payload) => {
-      fetch("http://eomp.herokuapp.com/users/register", {
+    register: async (context, payload) => {
+      fetch("http://localhost:6969/users/register", {
         method: 'POST',
         body: JSON.stringify({
             full_name: payload.full_name,
             email: payload.email,
             password: payload.password,
-            phone_number: payload.phone_number,
-            join_date: "2023-06-03",
+            phone: payload.phone,
+            joined_date: "2023-06-03",
             user_type: "user",
         }),
       headers: {
@@ -92,6 +95,17 @@ export default createStore({
       .then((response) => response.json())
       .then((data) => console.log(data));
         },
+    getProducts: async (context) => {
+      fetch("http://localhost:6969/products")
+        .then((response) => response.json())
+        .then((json) => context.commit("setProducts", json));
+    },
+    getProduct: async (context, id) => {
+      fetch("http://localhost:6969/products/" +id)
+        .then((response) => response.json())
+        .then((product) => context.commit("setProduct", product[0]));
+    },
+
     addToCart: async (context, id) => {
       this.state.cart.product.push(id);
           context.dispatch("updateCart", this.state.cart);
