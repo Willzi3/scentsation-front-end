@@ -1,5 +1,5 @@
 <template>
-    <div v-if="users" class="prods">
+    <div v-if="users" class="container">
    
   <UserCard class="card"
    v-for="user in users" 
@@ -23,5 +23,9 @@ export default {
 };
 </script>
 <style scoped>
-
+.container{
+  height: 86vh;
+  display: flex;
+  flex-direction: column;
+}
 </style>

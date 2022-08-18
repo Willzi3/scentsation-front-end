@@ -1,5 +1,10 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div class="container">
+    <h1>contact</h1>
   </div>
 </template>
+<style scoped>
+.container{
+  height: 86vh;
+}
+</style>

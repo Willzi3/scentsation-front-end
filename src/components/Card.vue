@@ -12,7 +12,7 @@ export default {
   props: ["product"],
 };
 </script>
-<style>
+<style scoped>
 .card{
    box-shadow: 5px 5px 5px 5px lightsalmon;
     border-radius: 10px;

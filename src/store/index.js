@@ -37,7 +37,7 @@ export default createStore({
   actions: {
         // Add new product
         addProduct: async (context, product) => {
-          fetch("http://localhost:6969/products/add_product", {
+          fetch("https://scentsation.herokuapp.com/products/add_product", {
             method: "POST",
             body: JSON.stringify(product),
             headers: {
@@ -48,7 +48,7 @@ export default createStore({
             .then(() => context.dispatch("getProduct"));
         },
     login: async (context, payload) => {
-      let res = await fetch("http://localhost:6969/users/login", {
+      let res = await fetch("https://scentsation.herokuapp.com/users/login", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export default createStore({
 
         // Verify token
         // 
-        fetch('http://localhost:6969/users/users/verify', {
+        fetch('https://scentsation.herokuapp.com//users/users/verify', {
           headers: {
             "Content-Type": "application/json",
             "x-auth-token": data.token
@@ -82,7 +82,7 @@ export default createStore({
       }
     },
     register: async (context, payload) => {
-      fetch("http://localhost:6969/users/register", {
+      fetch("https://scentsation.herokuapp.com/users/register", {
         method: 'POST',
         body: JSON.stringify({
             full_name: payload.full_name,
@@ -100,22 +100,22 @@ export default createStore({
       .then((data) => console.log(data));
         },
     getProducts: async (context) => {
-      fetch("http://localhost:6969/products")
+      fetch("https://scentsation.herokuapp.com/products")
         .then((response) => response.json())
         .then((json) => context.commit("setProducts", json));
     },
     getProduct: async (context, id) => {
-      fetch("http://localhost:6969/products/" +id)
+      fetch("https://scentsation.herokuapp.com/products/" +id)
         .then((response) => response.json())
         .then((product) => context.commit("setProduct", product[0]));
     },
     getUsers: async (context) => {
-      fetch("http://localhost:6969/users")
+      fetch("https://scentsation.herokuapp.com/users")
         .then((response) => response.json())
         .then((json) => context.commit("setUsers", json));
     },
     getUser: async (context, id) => {
-      fetch("http://localhost:6969/users/" +id)
+      fetch("https://scentsation.herokuapp.com/users/" +id)
         .then((response) => response.json())
         .then((user) => context.commit("setUser", user[0]));
     },
