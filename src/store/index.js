@@ -2,7 +2,8 @@ import { createStore } from 'vuex'
 import router from '../router/index'
 export default createStore({
   state: {
-    User: null,
+    user: null,
+    users: null,
     Token: null,
     cart: [],
     product: null,
@@ -10,7 +11,10 @@ export default createStore({
   },
   mutations: {
     setUser: (state, user) => {
-      state.User = user  ;
+      state.user = user  ;
+    },
+    setUsers: (state, users) => {
+      state.users = users  ;
     },
     setToken: (state, token) => {
       state.token = token  ;
@@ -105,6 +109,17 @@ export default createStore({
         .then((response) => response.json())
         .then((product) => context.commit("setProduct", product[0]));
     },
+    getUsers: async (context) => {
+      fetch("http://localhost:6969/users")
+        .then((response) => response.json())
+        .then((json) => context.commit("setUsers", json));
+    },
+    getUser: async (context, id) => {
+      fetch("http://localhost:6969/users/" +id)
+        .then((response) => response.json())
+        .then((user) => context.commit("setUser", user[0]));
+    },
+
 
     addToCart: async (context, id) => {
       this.state.cart.product.push(id);
