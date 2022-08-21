@@ -11,7 +11,7 @@
         <router-link to="/reset"><p>Reset-Psw</p></router-link>
       </div>
     </form>
-    <div v-if="user">Welcome {{ user.fullname }}</div>
+    <div v-if="user">Welcome {{ user.full_name }}</div>
   </div>
 </template>
 <script>

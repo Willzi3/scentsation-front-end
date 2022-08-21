@@ -67,7 +67,7 @@ export default createStore({
 
         // Verify token
         // 
-        fetch('https://scentsation.herokuapp.com//users/users/verify', {
+        fetch('https://scentsation.herokuapp.com/users/users/verify', {
           headers: {
             "Content-Type": "application/json",
             "x-auth-token": data.token
