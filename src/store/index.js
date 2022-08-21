@@ -37,7 +37,7 @@ export default createStore({
   actions: {
         // Add new product
         addProduct: async (context, product) => {
-          fetch("https://scentsation.herokuapp.com/products/add_product", {
+          fetch("https://scentsation.herokuapp.com/products", {
             method: "POST",
             body: JSON.stringify(product),
             headers: {

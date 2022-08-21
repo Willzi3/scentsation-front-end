@@ -1,11 +1,16 @@
 <template>
-    <div v-if="products" class="prods">
+
+    <div v-if="products"  class="prods">
+     
    
   <Card class="card"
    v-for="product in products" 
    :key="product.product_id" 
    :product="product"/>
 
+  </div>
+  <div v-if="user">
+    {{ user.full_name }}
   </div>
 </template>
 <script>
@@ -15,10 +20,14 @@ export default {
     products() {
       return this.$store.state.products
     },
+    user() {
+      return this.$store.state.user
+    }
   },
   components: { Card },
   mounted() {
     this.$store.dispatch("getProducts");
+    this.$store.dispatch("getUser");
   }
 };
 </script>
@@ -45,5 +54,9 @@ h1{
 .image{
     height: 170px;
     width: 200px;
+}
+.profile{
+  border: 1px solid black;
+  height: 500px;
 }
 </style>

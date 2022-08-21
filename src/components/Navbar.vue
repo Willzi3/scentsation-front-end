@@ -1,5 +1,6 @@
 <template>
-  <nav role="navigation" class="nav">
+  <div>
+    <nav role="navigation" class="nav">
     <div id="menuToggle">
       <input type="checkbox" />
       <span></span>
@@ -19,6 +20,7 @@
       </ul>
     </div>
   </nav>
+  </div>
   <router-view/>
 </template>
 
