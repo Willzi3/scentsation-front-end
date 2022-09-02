@@ -4,20 +4,19 @@ export default createStore({
   state: {
     user: null,
     users: null,
-    Token: null,
-    cart: [],
+    token: null,
     product: null,
-    products: null
+    products: null,
   },
   mutations: {
     setUser: (state, user) => {
-      state.user = user  ;
+      state.user = user;
     },
     setUsers: (state, users) => {
-      state.users = users  ;
+      state.users = users;
     },
     setToken: (state, token) => {
-      state.token = token  ;
+      state.token = token;
     },
     setProduct: (state, product) => {
       state.product = product;
@@ -25,30 +24,10 @@ export default createStore({
     setProducts: (state, products) => {
       state.products = products;
     },
-    updateCart: (state, product) => {
-
-      state.cart.push(product);
-    },
-    removeFromCart: (state, cart) => {
-      state.cart = cart;
-    },
-   
   },
   actions: {
-        // Add new product
-        addProduct: async (context, product) => {
-          fetch("https://scentsation.herokuapp.com/products", {
-            method: "POST",
-            body: JSON.stringify(product),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          })
-            .then((response) => response.json())
-            .then(() => context.dispatch("getProduct"));
-        },
     login: async (context, payload) => {
-      let res = await fetch("https://scentsation.herokuapp.com/users/login", {
+      let res = await fetch("https://compify-backend.herokuapp.com/users/login", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -61,36 +40,37 @@ export default createStore({
       });
 
       let data = await res.json()
+      console.log(data)
 
       if(data.token){
         context.commit('setToken', data.token)
 
         // Verify token
         // 
-        fetch('https://scentsation.herokuapp.com/users/users/verify', {
+        fetch('https://compify-backend.herokuapp.com/users/users/verify', {
           headers: {
             "Content-Type": "application/json",
             "x-auth-token": data.token
           }
         }).then((res) => res.json()).then((data) => {
           context.commit('setUser', data.user)
-          router.push('/products')
+          console.log(data.user)
+          router.push('/products', alert("Successfully Logged In:"))
         })
-      }
+      } 
       else {
         alert(data)
       }
     },
     register: async (context, payload) => {
-      fetch("https://scentsation.herokuapp.com/users/register", {
+      fetch("https://compify-backend.herokuapp.com/users/register", {
         method: 'POST',
         body: JSON.stringify({
             full_name: payload.full_name,
             email: payload.email,
             password: payload.password,
-            phone: payload.phone,
-            joined_date: "2023-06-03",
             user_type: "user",
+            image: payload.image
         }),
       headers: {
         "Content-type": "application/json",
@@ -98,39 +78,59 @@ export default createStore({
     })
       .then((response) => response.json())
       .then((data) => console.log(data));
+      router.push('/', alert("successfully registered"))
+
         },
-    getProducts: async (context) => {
-      fetch("https://scentsation.herokuapp.com/products")
-        .then((response) => response.json())
-        .then((json) => context.commit("setProducts", json));
-    },
-    getProduct: async (context, id) => {
-      fetch("https://scentsation.herokuapp.com/products/" +id)
-        .then((response) => response.json())
-        .then((product) => context.commit("setProduct", product[0]));
-    },
+        update: async (context, payload) => {
+          fetch("https://compify-backend.herokuapp.com/users/register", {
+            method: 'POST',
+            body: JSON.stringify({
+                birth_date: payload.birth_date,
+                gender: payload.gender,
+                address: payload.address,
+                description: payload.description,
+                image: payload.image
+            }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data));
+          router.push('/profile', alert("profile successfully updated"))
+    
+            },
     getUsers: async (context) => {
-      fetch("https://scentsation.herokuapp.com/users")
+      fetch("https://compify-backend.herokuapp.com/users")
         .then((response) => response.json())
         .then((json) => context.commit("setUsers", json));
     },
     getUser: async (context, id) => {
-      fetch("https://scentsation.herokuapp.com/users/" +id)
+      fetch("https://compify-backend.herokuapp.com/users/" +id)
         .then((response) => response.json())
-        .then((user) => context.commit("setUser", user[0]));
+        .then((user) => context.commit("setProduct", user[0]));
     },
-
-
-    addToCart: async (context, id) => {
-      this.state.cart.product.push(id);
-          context.dispatch("updateCart", this.state.cart);
+    getProducts: async (context) => {
+      fetch("https://compify-backend.herokuapp.com/products")
+        .then((response) => response.json())
+        .then((json) => context.commit("setProducts", json));
+    },
+    getProduct: async (context, id) => {
+      fetch("https://compify-backend.herokuapp.com/products/" +id)
+        .then((response) => response.json())
+        .then((product) => context.commit("setUser", product[0]));
+    },
+    //add Post
+    addPost: async (context, post) => {
+      fetch("https://compify-backend.herokuapp.com/users/posts", {
+        method: "POST",
+        body: JSON.stringify(post),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
         },
-    deleteFromCart: async (context, id) => {
-          const newCart = context.state.cart.filter((product) => product.id != id);
-          context.commit("removeFromCart", newCart);
-        },
-  },
-  modules: {
+      })
+        .then((response) => response.json())
+        .then((post) => context.dispatch("getPost", post));
+    },
   }
 })
-

@@ -11,7 +11,7 @@ export default {
 footer{
   
     height: 100px;
-    background: lightsalmon;
+    background: lightgrey;
     display: flex;
     justify-content: center;
     align-items: center;

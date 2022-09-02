@@ -85,7 +85,7 @@
   height: 4px;
   margin-bottom: 5px;
   position: relative;
-  background: salmon;
+  background: grey;
   border-radius: 3px;
   z-index: 1;
   transform-origin: 4px 0px;
@@ -131,7 +131,7 @@
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
-  background: salmon;
+  background: grey;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */

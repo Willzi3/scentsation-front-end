@@ -2,13 +2,12 @@
 
   <div class="container">
     <form @submit.prevent="register">
-      <h3>Register your profile on Jewels</h3>
+      <h3>Register</h3>
           <input class="form-input" type="text" name="full_name" required v-model="full_name" placeholder="Full Name"/>
           <input class="form-input" type="text" name="email" required v-model="email" placeholder="Email:"/>
           <input class="form-input" type="text" name="password" required v-model="password" placeholder="Password:"/>
-          <input class="form-input" type="text" name="phone" required v-model="phone" placeholder="Phone:"/>
           <input class="form-input" type="text" name="joined_date" required v-model="joined_date" placeholder="Joined Date:"/>
-          <input class="form-input" type="text" name="user_type" required v-model="user_type" placeholder="User Type:"/>
+          <input class="user-type" type="text" name="user_type" required v-model="user_type" placeholder="User Type:" readonly/>
           <input class="form-btn" type="submit" value="Register" />
           <hr>
           <div class="form-extra">
@@ -34,8 +33,7 @@ export default {
       email: "",
       password: "",
       phone: "",
-      joined_date: "",
-      user_type: ""
+      user_type: "user"
     };
   },
   methods: {
@@ -44,7 +42,6 @@ export default {
         full_name: this.full_name,
         email: this.email,
         password: this.password,
-        phone: this.phone,
         joined_date: this.joined_date,
         user_type: this.user_type
       });
@@ -60,7 +57,7 @@ export default {
   align-items: center;
 }
 form{
-  box-shadow: 5px 5px 5px 5px lightsalmon;
+  border: 1px solid black;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -69,11 +66,10 @@ form{
   width: 300px;
   height: 400px;
   gap: 10px;
-  background: salmon;
 }
 .form-input{
   width: 200px;
-  border: none;
+  border: 1px solid lightgrey;
   border-radius: 5px;
   height: 30px;
 }
@@ -102,7 +98,6 @@ form{
   color: black;
 }
 h3{
-  color: white;
   font-weight: bold;
   font-size: 1.4rem;
 }
@@ -110,5 +105,8 @@ hr{
   width: 90%;
   
 
+}
+.user-type{
+  display: none;
 }
 </style>

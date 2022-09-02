@@ -11,6 +11,7 @@
 <script>
 export default {
    props: ["id"],
+   
    computed: {
     products() {
         return this.$store.state.product;

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form @submit.prevent="login">
-      <h3>Log in to Scentsation</h3>
+      <h3>Log in:</h3>
       <input class="form-input" type="text" name="email" required v-model="email"/>
       <input class="form-input" type="text" name="password" required v-model="password"/>
       <input class="form-btn" type="submit" value="Login" />
@@ -39,13 +39,13 @@ export default {
 </script>
 <style scoped>
 .container{
-  height: 86vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 form{
-  box-shadow: 5px 5px 5px 5px lightsalmon;
+  border: 1px solid black;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -54,11 +54,10 @@ form{
   width: 300px;
   height: 300px;
   gap: 10px;
-  background: salmon;
 }
 .form-input{
   width: 200px;
-  border: none;
+  border: 1px solid lightgray;
   border-radius: 5px;
   height: 30px;
 }
@@ -77,7 +76,7 @@ form{
   border: none;
   border-radius: 5px;
   height: 30px;
-  background: white;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -87,7 +86,6 @@ form{
   color: black;
 }
 h3{
-  color: white;
   font-weight: bold;
   font-size: 1.4rem;
 }

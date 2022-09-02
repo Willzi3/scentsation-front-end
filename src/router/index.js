@@ -16,24 +16,17 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Admin.vue')
+    path: '/edit',
+    name: 'Edit',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Edit.vue')
   },
   {
-    path: '/admin-users',
-    name: 'AdminUsers',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AdminUsers.vue')
-  },
-  {
-    path: '/admin-products',
-    name: 'AdminProducts',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AdminProducts.vue')
-  },
-  {
-    path: '/admin-products/:id',
-    name: 'AdminProductDetails',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AdminProductDetails.vue')
+    path: '/profile',
+    name: 'Profile',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
   },
   {
     path: '/products',
@@ -50,16 +43,6 @@ const routes = [
     name: 'Register',
     component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
   },
-  {
-    path: '/reset',
-    name: 'Reset',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Reset.vue')
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Contact.vue')
-  }
 ]
 
 const router = createRouter({
