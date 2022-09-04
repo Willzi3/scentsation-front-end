@@ -3,8 +3,7 @@
     <div class="card">
       <img class="product_img" :src="product.image" />
       <p class="product_title">{{ product.name }}</p>
-      <p class="product_title">{{ product.price }}</p>
-       
+      <p class="product_title">R{{ product.price }}.00</p>
     </div>
   </router-link>
 </template>
@@ -15,21 +14,26 @@ export default {
 </script>
 <style scoped>
 .card{
-   border: 1px solid black;
+   background: white;
     border-radius: 10px;
-    width: 400px;
-    height: 400px;
+    width: 250px;
+    height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
 }
+
 .product_img{
-    height: 200px;
-    width: 200px;
+    height: 130px;
+    width: 130px;
 }
 .product_price{
   margin: none;
+}
+.product_box{
+  display: flex;
+
 }
 </style>

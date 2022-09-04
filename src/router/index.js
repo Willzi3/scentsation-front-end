@@ -8,6 +8,11 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/home',
+    name: 'Home',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
+  },
+  {
     path: '/about',
     name: 'about',
     // route level code-splitting
@@ -42,6 +47,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue')
+  },
+  {
+    path: '/cpu',
+    name: 'CPU',
+    component: () => import(/* webpackChunkName: "about" */ '../views/CPU.vue')
   },
 ]
 

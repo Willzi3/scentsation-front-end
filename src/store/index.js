@@ -7,6 +7,7 @@ export default createStore({
     token: null,
     product: null,
     products: null,
+    asc: true
   },
   mutations: {
     setUser: (state, user) => {
@@ -23,6 +24,16 @@ export default createStore({
     },
     setProducts: (state, products) => {
       state.products = products;
+    },
+    sortByPrice: (state) => {
+      state.products.sort((a, b) => {
+        return a.price - b.price; //like vanilla javascript, this is how you make a sort function
+      });
+      if (!state.asc) {
+        //if the asc is not true, it reverses the current order of the list
+        state.products.reverse(); // reverts the order
+      }
+      state.asc = !state.asc; //states that when the function is run, asc becomes false instead of true
     },
   },
   actions: {
@@ -55,7 +66,7 @@ export default createStore({
         }).then((res) => res.json()).then((data) => {
           context.commit('setUser', data.user)
           console.log(data.user)
-          router.push('/products', alert("Successfully Logged In:"))
+          router.push('/home', alert("Successfully Logged In:"))
         })
       } 
       else {
@@ -118,7 +129,7 @@ export default createStore({
     getProduct: async (context, id) => {
       fetch("https://compify-backend.herokuapp.com/products/" +id)
         .then((response) => response.json())
-        .then((product) => context.commit("setUser", product[0]));
+        .then((product) => context.commit("setProduct", product[0]));
     },
     //add Post
     addPost: async (context, post) => {

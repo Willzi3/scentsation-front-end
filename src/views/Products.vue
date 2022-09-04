@@ -1,92 +1,95 @@
 <template>
-  <div v-if="user" class="profile-name">
-    <i class="fa-solid fa-user"></i><router-link to="/profile"><p>{{ user.full_name }}</p></router-link>
-     </div>
-<div class="container">
-  
-  <div v-if="products"  class="prods">
-     
-   
-     <Card class="card"
-      v-for="product in products" 
-      :key="product.product_id" 
-      :product="product"/>
-   
-     </div>
-</div>
+ <div class="container">
+  <form class="filters">
+    <button @click="sort">Sort</button>
+    <select name="" class="inp" v-model="category">
+        <label>Sort By Catergory</label>
+        <option value="All" selected>All</option>
+        <option value="CPU">CPU</option>
+        <option value="Case-Fans">Case-Fans</option>
+        <option value="Console-Accessories">Console-Accessories</option>
+        <option value="Console">Console</option>
+        <option value="Gaming-Chairs">Gaming-Chairs</option>
+        <option value="Gaming-Desktops">Gaming-Desktops</option>
+        <option value="Graphics-Card">Graphics-Card</option>
+    </select>
+    <input type="text" v-model="search" placeholder="search..."  class="inp" />
+    {{ search }}
+</form>
+ <div v-if="products" class="prods">
+  <Card
+   v-for="product of filteredProducts" 
+   :key="product.id" 
+   :product="product"/>
+
+  </div>
+ </div>
 </template>
 <script>
 import Card from "../components/Card.vue";
 export default {
+  data() {
+    return{
+      search: "",
+      price: "All",
+      category: "All"
+    }
+  },
   computed: {
     products() {
       return this.$store.state.products
     },
-    user() {
-      return this.$store.state.user
-    }
+  filteredProducts() {
+    return this.$store.state.products?.filter((product) => {
+      let isMatch = true;
+      if (!product.name.toLowerCase().includes(this.search.toLowerCase())) isMatch = false
+      if(this.category !== "All" && product.category !== this.category)
+      isMatch = false;
+      return isMatch
+    });
+  },
+  },
+  methods: {
+sort() {
+  this.$store.commit("sortByPrice");
+}
   },
   components: { Card },
   mounted() {
     this.$store.dispatch("getProducts");
-    this.$store.dispatch("getUser");
   }
 };
 </script>
 <style scoped>
-  .container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-h1{
-    font-size: 5rem;
-    color: black;
+.container{
+  margin: 10px;
 }
 .prods{
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    margin-inline: 7%;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.7rem;
-    font-weight: bold;
-    box-shadow: 5px 5px 5px 5px lightgrey;
+  background: grey;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 5%;
+  gap: 20px;
+  padding: 20px;
 }
 .prods a {
-    text-decoration: none;
-    color: black;
-}
-.image{
-    height: 170px;
-    width: 200px;
-}
-.profile-name{
-  height: 50px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 10px;
-  padding-right: 130px;
-  font-size: 1.5rem;
+  text-decoration: none;
+  color: black;
   font-weight: bold;
-  margin: 10px;
-  
 }
-.profile-name p{
-  border: 1px solid black;
+.filters{
+  background: lightgrey;
   border-radius: 10px;
-  height: 50px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
-  text-decoration: none;
-}
-.profile-name a{
-  text-decoration: none;
-  color: none;
+  margin-inline: 20%;
+  margin-bottom: -70px;
+  gap: 10px;
 }
 </style>
+

@@ -31,7 +31,7 @@ export default {
     align-items: center;
 }
 .prod{
-box-shadow: 5px 5px 5px 5px lightsalmon;
+box-shadow: 5px 5px 5px 5px lightgrey;
 width: 500px;
 height: 75vh;
 display: flex;
@@ -45,7 +45,7 @@ align-items: center;
 }
 .prod p {
     font-size: 2rem;
-    color: salmon;
+   
    font-family: 'Rubik Distressed';
 }
 

@@ -8,7 +8,7 @@
       <span></span>
       <ul id="menu">
         <a
-          href="/"
+          href="/home"
           class="nav-link router-link-exact-active router-link-active"
           target="_self"
           aria-current="page"
