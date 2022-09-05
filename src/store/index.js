@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import router from '../router/index'
 export default createStore({
   state: {
-    user: null || JSON.parse(localStorage.getItem('user')),
+    user: null || JSON.parse(localStorage.getItem("users")),
     users: null,
     token: null,
     product: null,
@@ -12,7 +12,7 @@ export default createStore({
   mutations: {
     setUser: (state, user) => {
       state.user = user;
-      localStorage.setItem('users', JSON.stringify(user));
+      localStorage.setItem("users", JSON.stringify(user));
     },
     setUsers: (state, users) => {
       state.users = users;
@@ -98,28 +98,28 @@ export default createStore({
       router.push('/', alert("successfully registered"))
 
         },
-        update: async (context, payload) => {
-          fetch("https://compify-backend.herokuapp.com/users/update", {
-            method: 'PUT',
-            body: JSON.stringify({
-              full_name: payload.full_name,
-              user_type: "user",
-              joined_date: payload.joined_date,
-              phone: payload.phone,
-              gender: payload.gender,
-              address: payload.address,
-              description: payload.description,
-              image: payload.image,
-            }),
-          headers: {
-            "Content-type": "application/json",
-          },
-        })
-          .then((response) => response.json())
-          .then((data) => console.log(data));
-          router.push('/profile', alert("profile successfully updated"))
-    
-            },
+        // Updateproduct: async (context, Product) => {
+        //   fetch("http://localhost:7373/products/" + Product.id, {
+        //     method: "PUT",
+        //     body: JSON.stringify(Product),
+        //     headers: {
+        //       "Content-type": "application/json; charset=UTF-8",
+        //     },
+        //   })
+        //     .then((response) => response.json())
+        //     .then(() => context.commit("setproducts"));
+        // },
+        // Updateuser: async (context, user) => {
+        //   fetch("http://localhost:7373/products/" +id, {
+        //     method: "PUT",
+        //     body: JSON.stringify(user),
+        //     headers: {
+        //       "Content-type": "application/json; charset=UTF-8",
+        //     },
+        //   })
+        //     .then((response) => response.json())
+        //     .then(() => context.commit("setproducts"));
+        // },
     getUsers: async (context) => {
       fetch("https://compify-backend.herokuapp.com/users")
         .then((response) => response.json())
@@ -140,17 +140,93 @@ export default createStore({
         .then((response) => response.json())
         .then((product) => context.commit("setProduct", product[0]));
     },
-    //add Post
-    addPost: async (context, post) => {
-      fetch("https://compify-backend.herokuapp.com/users/posts", {
-        method: "POST",
-        body: JSON.stringify(post),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      })
-        .then((response) => response.json())
-        .then((post) => context.dispatch("getPost", post));
-    },
+    // Deleteproduct: async (context, id) => {
+    //   fetch("http://localhost:7373/products/" + id, {
+    //     method: "DELETE",
+    //   }).then((product) => context.commit("setproducts", product));
+    // },
+    // Deleteuser: async (context, id) => {
+    //   fetch("http://localhost:7373/users/" + id, {
+    //     method: "DELETE",
+    //   }).then((user) => context.commit("setusers", user));
+    // },
+    // Addproduct: async (context, product) => {
+    //   fetch("http://localhost:7373/products/", {
+    //     method: "POST",
+    //     body: JSON.stringify(product),
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //     },
+    //   })
+    //     .then((response) => response.json())
+    //     .then(() => context.commit("setproducts"));
+    // },
+    //cart
+    // getcart: async (context, id) => {
+    //   id = context.state.user.user_id;
+    //   await fetch("http://localhost:7373/users/" + id + "/cart", {
+    //     method: "GET",
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //       "x-auth-token": context.state.token,
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       context.commit("setarts", data);
+    //     });
+    // },
+    // addTocart: async (context, art, id) => {
+    //   console.log(context.state.user);
+    //   id = context.state.user.user_id;
+    //   console.log(art);
+    //   await fetch("http://localhost:7373/users/" + id + "/cart", {
+    //     method: "POST",
+    //     body: JSON.stringify(art),
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //       "x-auth-token": context.state.token,
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       context.dispatch("getcart", id);
+    //     });
+    // },
+    // clearcart: async (context, id) => {
+    //   id = context.state.user.user_id;
+    //   await fetch("http://localhost:7373/users/" + id + "/cart", {
+    //     method: "DELETE",
+    //     headers: {
+    //       "Content-type": "application/json; charset=UTF-8",
+    //       "x-auth-token": context.state.token,
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       context.dispatch("getcart", id);
+    //     });
+    // },
+    // deletecartItem: async (context, list, id) => {
+    //   id = context.state.user.user_id;
+    //   await fetch(
+    //     "http://localhost:7373/users/" + id + "/cart/" + list.cartid,
+    //     {
+    //       method: "DELETE",
+    //       headers: {
+    //         "Content-type": "application/json; charset=UTF-8",
+    //         "x-auth-token": context.state.token,
+    //       },
+    //     }
+    //   )
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //       context.dispatch("getcart", id);
+    //     });
+    // },
   }
 })

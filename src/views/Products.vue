@@ -101,7 +101,7 @@ sort() {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-inline: 20%;
+  margin-inline: 8%;
   margin-bottom: -70px;
   gap: 10px;
 }

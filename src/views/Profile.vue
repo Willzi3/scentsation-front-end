@@ -1,7 +1,7 @@
 <template>
       <div class="container">
-        <div v-if="user">
-        <i class="fa-solid fa-user"></i><router-link to="/profile"><p>{{ user.full_name }}</p></router-link>
+        <div class="profile" v-if="user">
+        <!-- <i class="fa-solid fa-user"></i><router-link to="/profile"><p>{{ user.full_name }}</p></router-link> -->
         <div class="profile-image">
            <img :src="user.image" />
          </div>
@@ -34,7 +34,6 @@ export default {
 
 <style scoped>
 .container{
-    height: 82.9vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,6 +48,9 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    padding: 20px;
+    margin: 10px;
+    
 }
 .profile-name{
   height: 50px;
@@ -80,7 +82,7 @@ export default {
     border: 1px solid lightgrey;
     border-radius: 6px;
     width: 400px;
-    font-size: 2rem;
+    font-size: 1.3rem;
     font-weight: bold;
     text-transform: uppercase;
     height: 50px;
@@ -88,13 +90,16 @@ export default {
 .profile-image{
     border: 1px solid lightgrey;
     border-radius: 50%;
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .profile-image img{
   border-radius: 50%;
-    height: 398px;
-    width: 398px;
+    height: 200px;
+    width: 200px;
 }
 .profile-edit{
     width: 400px;
