@@ -1,22 +1,22 @@
 <template>
-     <div v-if="user" class="profile-name">
-    <i class="fa-solid fa-user"></i><router-link to="/profile"><p>{{ user.full_name }}</p></router-link>
-     </div>
- <div class="container">
-    <div class="profile-nav">
-        <div class="nav-item"></div>
-    </div>
-    <div class="profile" v-if="user">
+      <div class="container">
+        <div v-if="user">
+        <i class="fa-solid fa-user"></i><router-link to="/profile"><p>{{ user.full_name }}</p></router-link>
         <div class="profile-image">
-          <img :src="user.image" />
-        </div>
-       <div class="profile-item">{{ user.gender}}</div>
-       <div class="profile-item">{{ user.address}}</div>
-       <div class="profile-item">{{ user.description}}</div>
-       <div class="profile-item">{{ user.full_name}}</div>
-       <router-link to="/edit"><div class="profile-edit">Edit</div></router-link>
-    </div>
- </div>
+           <img :src="user.image" />
+         </div>
+        <div class="profile-item">{{ user.gender}}</div>
+        <div class="profile-item">{{ user.address}}</div>
+        <div class="profile-item">{{ user.description}}</div>
+        <div class="profile-item">{{ user.full_name}}</div>
+        <router-link to="/edit"><div class="profile-edit">Edit</div></router-link>
+
+      </div>
+      
+      <div v-else>
+        No User
+      </div>
+      </div>
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getUser");
+    // this.$store.dispatch("getUser");
   }
 }
 </script>
@@ -90,6 +90,11 @@ export default {
     border-radius: 50%;
     height: 400px;
     width: 400px;
+}
+.profile-image img{
+  border-radius: 50%;
+    height: 398px;
+    width: 398px;
 }
 .profile-edit{
     width: 400px;

@@ -15,6 +15,16 @@
     </select>
     <input type="text" v-model="search" placeholder="search..."  class="inp" />
     {{ search }}
+    <router-link to="/profile">
+      <div class="user" v-if="user">
+      <i class="fa-solid fa-user"></i>
+      <div class="profile-name"><h2>{{user.full_name}}</h2></div>
+    </div>
+    </router-link>
+    <div class="cart">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <h2>Cart</h2>
+    </div>
 </form>
  <div v-if="products" class="prods">
   <Card
@@ -39,6 +49,9 @@ export default {
     products() {
       return this.$store.state.products
     },
+    user() {
+      return this.$store.state.user
+    },
   filteredProducts() {
     return this.$store.state.products?.filter((product) => {
       let isMatch = true;
@@ -57,6 +70,7 @@ sort() {
   components: { Card },
   mounted() {
     this.$store.dispatch("getProducts");
+    // this.$store.dispatch("getUser");
   }
 };
 </script>
@@ -90,6 +104,20 @@ sort() {
   margin-inline: 20%;
   margin-bottom: -70px;
   gap: 10px;
+}
+.user{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid black;
+  width: 270px;
+}
+.cart{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid black;
+  width: 150px;
 }
 </style>
 

@@ -7,7 +7,12 @@
           <input class="form-input" type="text" name="email" required v-model="email" placeholder="Email:"/>
           <input class="form-input" type="text" name="password" required v-model="password" placeholder="Password:"/>
           <input class="form-input" type="text" name="joined_date" required v-model="joined_date" placeholder="Joined Date:"/>
-          <input class="user-type" type="text" name="user_type" required v-model="user_type" placeholder="User Type:" readonly/>
+          <input class="form-input" type="text" name="phone" required v-model="phone" placeholder="Phone:"/>
+          <input class="form-input" type="text" name="gender" required v-model="gender" placeholder="Gender:"/>
+          <input class="form-input" type="text" name="address" required v-model="address" placeholder="Address:"/>
+          <input class="form-input" type="text" name="description" required v-model="description" placeholder="Description:"/>
+          <input class="form-input" type="text" name="image" required v-model="image" placeholder="Image:"/>
+          <input class="form-input" type="text" name="user_type" required v-model="user_type" placeholder="User Type:" readonly/>
           <input class="form-btn" type="submit" value="Register" />
           <hr>
           <div class="form-extra">
@@ -33,7 +38,13 @@ export default {
       email: "",
       password: "",
       phone: "",
-      user_type: "user"
+      user_type: "user",
+      joined_date: "",
+      phone: "",
+      gender: "",
+      address: "",
+      description: "",
+      image: "",
     };
   },
   methods: {
@@ -43,7 +54,15 @@ export default {
         email: this.email,
         password: this.password,
         joined_date: this.joined_date,
-        user_type: this.user_type
+        user_type: this.user_type,
+        joined_date: this.joined_date,
+        phone: this.phone,
+        gender: this.gender,
+        address: this.address,
+        description: this.description,
+        image: this.image
+
+
       });
     },
   },

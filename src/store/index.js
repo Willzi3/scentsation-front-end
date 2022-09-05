@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 import router from '../router/index'
 export default createStore({
   state: {
-    user: null,
+    user: null || JSON.parse(localStorage.getItem('user')),
     users: null,
     token: null,
     product: null,
@@ -12,9 +12,11 @@ export default createStore({
   mutations: {
     setUser: (state, user) => {
       state.user = user;
+      localStorage.setItem('users', JSON.stringify(user));
     },
     setUsers: (state, users) => {
       state.users = users;
+      
     },
     setToken: (state, token) => {
       state.token = token;
@@ -65,8 +67,7 @@ export default createStore({
           }
         }).then((res) => res.json()).then((data) => {
           context.commit('setUser', data.user)
-          console.log(data.user)
-          router.push('/home', alert("Successfully Logged In:"))
+          router.push('/products', alert("Successfully Logged In:"))
         })
       } 
       else {
@@ -81,7 +82,12 @@ export default createStore({
             email: payload.email,
             password: payload.password,
             user_type: "user",
-            image: payload.image
+            joined_date: payload.joined_date,
+            phone: payload.phone,
+            gender: payload.gender,
+            address: payload.address,
+            description: payload.description,
+            image: payload.image,
         }),
       headers: {
         "Content-type": "application/json",
@@ -93,14 +99,17 @@ export default createStore({
 
         },
         update: async (context, payload) => {
-          fetch("https://compify-backend.herokuapp.com/users/register", {
-            method: 'POST',
+          fetch("https://compify-backend.herokuapp.com/users/update", {
+            method: 'PUT',
             body: JSON.stringify({
-                birth_date: payload.birth_date,
-                gender: payload.gender,
-                address: payload.address,
-                description: payload.description,
-                image: payload.image
+              full_name: payload.full_name,
+              user_type: "user",
+              joined_date: payload.joined_date,
+              phone: payload.phone,
+              gender: payload.gender,
+              address: payload.address,
+              description: payload.description,
+              image: payload.image,
             }),
           headers: {
             "Content-type": "application/json",
@@ -119,7 +128,7 @@ export default createStore({
     getUser: async (context, id) => {
       fetch("https://compify-backend.herokuapp.com/users/" +id)
         .then((response) => response.json())
-        .then((user) => context.commit("setProduct", user[0]));
+        .then((user) => context.commit("setUser", user[0]));
     },
     getProducts: async (context) => {
       fetch("https://compify-backend.herokuapp.com/products")

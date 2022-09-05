@@ -1,13 +1,16 @@
 <template>
  <div class="container">
     <form @submit.prevent="update">
-      <h3>Register</h3>
-          <input class="form-input" type="text" name="birth_date" required v-model="birth_date" placeholder="Birth Date"/>
-          <input class="form-input" type="text" name="gender" required v-model="gender" placeholder="gender:"/>
+      <h3>Update</h3>
+        <input class="form-input" type="text" name="full_name" required v-model="full_name" placeholder="Full Name"/>
+          <input class="form-input" type="text" name="joined_date" required v-model="joined_date" placeholder="Joined Date:"/>
+          <input class="form-input" type="text" name="phone" required v-model="phone" placeholder="Phone:"/>
+          <input class="form-input" type="text" name="gender" required v-model="gender" placeholder="Gender:"/>
           <input class="form-input" type="text" name="address" required v-model="address" placeholder="Address:"/>
           <input class="form-input" type="text" name="description" required v-model="description" placeholder="Description:"/>
-          <input class="user-type" type="text" name="image" required v-model="image" placeholder="Image:"/>
-          <input class="form-btn" type="submit" value="Edit" />
+          <input class="form-input" type="text" name="image" required v-model="image" placeholder="Image:"/>
+          <input class="form-input" type="text" name="user_type" required v-model="user_type" placeholder="User Type:" readonly/>
+          <input class="form-btn" type="submit" value="Update" />
     </form>
 
     <div v-if="user">
@@ -25,17 +28,29 @@ export default {
   },
   data() {
     return {
-      birth_date: "",
+      full_name: "",
+      email: "",
+      password: "",
+      phone: "",
+      user_type: "user",
+      joined_date: "",
+      phone: "",
       gender: "",
       address: "",
       description: "",
-      image: ""
+      image: "",
     };
   },
   methods: {
     update() {
       this.$store.dispatch("update", {
-        birth_date: this.birth_date,
+        full_name: this.full_name,
+        email: this.email,
+        password: this.password,
+        joined_date: this.joined_date,
+        user_type: this.user_type,
+        joined_date: this.joined_date,
+        phone: this.phone,
         gender: this.gender,
         address: this.address,
         description: this.description,
