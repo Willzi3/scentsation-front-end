@@ -32,8 +32,4 @@ export default {
 .product_price{
   margin: none;
 }
-.product_box{
-  display: flex;
-
-}
 </style>
