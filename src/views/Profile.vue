@@ -10,6 +10,7 @@
         <div class="profile-item">{{ user.description}}</div>
         <div class="profile-item">{{ user.full_name}}</div>
         <router-link to="/edit"><div class="profile-edit">Edit</div></router-link>
+        <div class="profile-edit" @click="logout">Logout</div>
 
       </div>
       
@@ -28,12 +29,22 @@ export default {
   },
   mounted() {
     // this.$store.dispatch("getUser");
+  },
+  methods: {
+    logout() {
+      console.log("object");
+      this.$store.state.user = null;
+      this.$store.state.cart = null;
+      localStorage.removeItem("users");
+      this.$router.push("/");
+    }
   }
 }
 </script>
 
 <style scoped>
 .container{
+  height: 86vh;
     display: flex;
     justify-content: center;
     align-items: center;

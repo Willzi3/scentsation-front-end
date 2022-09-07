@@ -21,10 +21,12 @@
       <div class="profile-name"><h2>{{user.full_name}}</h2></div>
     </div>
     </router-link>
+   <router-link to="/cart">
     <div class="cart">
       <i class="fa-solid fa-cart-shopping"></i>
       <h2>Cart</h2>
     </div>
+   </router-link>
 </form>
  <div v-if="products" class="prods">
   <Card

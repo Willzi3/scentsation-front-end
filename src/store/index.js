@@ -7,9 +7,13 @@ export default createStore({
     token: null,
     product: null,
     products: null,
+    cart: null,
     asc: true
   },
   mutations: {
+    setCart: (state, cart) => {
+      state.cart = cart;
+    },
     setUser: (state, user) => {
       state.user = user;
       localStorage.setItem("users", JSON.stringify(user));
@@ -98,28 +102,39 @@ export default createStore({
       router.push('/', alert("successfully registered"))
 
         },
-        // Updateproduct: async (context, Product) => {
-        //   fetch("http://localhost:7373/products/" + Product.id, {
-        //     method: "PUT",
-        //     body: JSON.stringify(Product),
-        //     headers: {
-        //       "Content-type": "application/json; charset=UTF-8",
+        // update: async (context, payload) => {
+        //   fetch("https://compify-backend.herokuapp.com/users", {
+        //     method: 'PUT',
+        //     body: JSON.stringify({
+        //       full_name: payload.full_name,
+        //       user_type: "user",
+        //       joined_date: payload.joined_date,
+        //       phone: payload.phone,
+        //       gender: payload.gender,
+        //       address: payload.address,
+        //       description: payload.description,
+        //       image: payload.image,
+        //     }),
+        //   headers: {
+        //     "Content-type": "application/json",
+        //   },
+        // })
+        //   .then((response) => response.json())
+        //   .then((data) => console.log(data));
+        //   router.push('/profile', alert("profile successfully updated"))
+
         //     },
-        //   })
-        //     .then((response) => response.json())
-        //     .then(() => context.commit("setproducts"));
-        // },
-        // Updateuser: async (context, user) => {
-        //   fetch("http://localhost:7373/products/" +id, {
-        //     method: "PUT",
-        //     body: JSON.stringify(user),
-        //     headers: {
-        //       "Content-type": "application/json; charset=UTF-8",
-        //     },
-        //   })
-        //     .then((response) => response.json())
-        //     .then(() => context.commit("setproducts"));
-        // },
+        update: async (context, user) => {
+          fetch("https://compify-backend.herokuapp.com/users", {
+            method: "PUT",
+            body: JSON.stringify(user),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((response) => response.json())
+            .then((user) => context.commit("setuser", user));
+        },
     getUsers: async (context) => {
       fetch("https://compify-backend.herokuapp.com/users")
         .then((response) => response.json())
@@ -140,18 +155,19 @@ export default createStore({
         .then((response) => response.json())
         .then((product) => context.commit("setProduct", product[0]));
     },
-    // Deleteproduct: async (context, id) => {
-    //   fetch("http://localhost:7373/products/" + id, {
-    //     method: "DELETE",
-    //   }).then((product) => context.commit("setproducts", product));
-    // },
+    Deleteproduct: async (context, id) => {
+      fetch("https://compify-backend.herokuapp.com/products/" + id, {
+        method: "DELETE",
+      }).then((product) => context.commit("setProduct", product));
+      this.router.push("/admin")
+    },
     // Deleteuser: async (context, id) => {
     //   fetch("http://localhost:7373/users/" + id, {
     //     method: "DELETE",
     //   }).then((user) => context.commit("setusers", user));
     // },
     // Addproduct: async (context, product) => {
-    //   fetch("http://localhost:7373/products/", {
+    //   fetch("https://compify-backend.herokuapp.com/products/", {
     //     method: "POST",
     //     body: JSON.stringify(product),
     //     headers: {
@@ -159,29 +175,50 @@ export default createStore({
     //     },
     //   })
     //     .then((response) => response.json())
-    //     .then(() => context.commit("setproducts"));
+    //     .then(() => context.commit("setProducts"));
     // },
-    //cart
-    // getcart: async (context, id) => {
-    //   id = context.state.user.user_id;
-    //   await fetch("http://localhost:7373/users/" + id + "/cart", {
-    //     method: "GET",
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //       "x-auth-token": context.state.token,
-    //     },
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       context.commit("setarts", data);
-    //     });
-    // },
-    // addTocart: async (context, art, id) => {
+    addProduct: async (context, payload) => {
+      fetch("https://compify-backend.herokuapp.com/products/", {
+        method: 'POST',
+        body: JSON.stringify({
+            name: payload.name,
+            price: payload.price,
+            descriptions: payload.descriptions,
+            image: payload.image,
+            category: payload.category,
+            created_date: payload.created_date,
+            stock: payload.stock,
+           
+        }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+      
+
+        },
+    getCart: async (context, id) => {
+      id = context.state.user.user_id;
+      await fetch("https://compify-backend.herokuapp.com/users" + id + "/cart", {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          "x-auth-token": context.state.token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          context.commit("setProducts", data);
+        });
+    },
+    // addTocart: async (context, product, id) => {
     //   console.log(context.state.user);
     //   id = context.state.user.user_id;
-    //   console.log(art);
-    //   await fetch("http://localhost:7373/users/" + id + "/cart", {
+    //   console.log(product);
+    //   await fetch("https://compify-backend.herokuapp.com/users" + id + "/cart", {
     //     method: "POST",
     //     body: JSON.stringify(art),
     //     headers: {

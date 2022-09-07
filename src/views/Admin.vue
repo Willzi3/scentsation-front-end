@@ -6,7 +6,7 @@
       v-for="product in products" 
       :key="product.id" 
       :product="product"/>
-   
+   <router-link to="/AddProduct">add product</router-link>
      </div>
      <div v-if="users" class="prods">
      <userCard
@@ -56,7 +56,7 @@
      padding: 20px;
      width: 50%;
      height: 40%;
-     overflow: scroll;
+
    }
    .prods a {
      text-decoration: none;
