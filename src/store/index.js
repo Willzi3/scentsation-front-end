@@ -1,8 +1,10 @@
 import { createStore } from 'vuex'
 import router from '../router/index'
+import createPersistedState from "vuex-persistedstate";
 export default createStore({
   state: {
-    user: null || JSON.parse(localStorage.getItem("users")),
+    // user: null || JSON.parse(localStorage.getItem("users")),
+    user:null,
     users: null,
     token: null,
     product: null,
@@ -16,7 +18,7 @@ export default createStore({
     },
     setUser: (state, user) => {
       state.user = user;
-      localStorage.setItem("users", JSON.stringify(user));
+      // localStorage.setItem("users", JSON.stringify(user));
     },
     setUsers: (state, users) => {
       state.users = users;
@@ -265,5 +267,6 @@ export default createStore({
     //       context.dispatch("getcart", id);
     //     });
     // },
-  }
+  },
+  plugins: [createPersistedState()]
 })

@@ -6,7 +6,7 @@
       <span></span>
       <span></span>
       <span></span>
-      <ul id="menu" v-if="user">
+      <ul id="menu">
         <a
           href="/home"
           class="nav-link router-link-exact-active router-link-active"
