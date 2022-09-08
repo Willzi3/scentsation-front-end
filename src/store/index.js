@@ -72,6 +72,7 @@ export default createStore({
             "x-auth-token": data.token
           }
         }).then((res) => res.json()).then((data) => {
+          console.log(data.user);
           context.commit('setUser', data.user)
           router.push('/products', alert("Successfully Logged In:"))
         })
@@ -105,7 +106,7 @@ export default createStore({
 
         },
         // update: async (context, payload) => {
-        //   fetch("https://compify-backend.herokuapp.com/users", {
+        //   fetch("https://compify-backend.herokuapp.com/users" +user.user_id, {
         //     method: 'PUT',
         //     body: JSON.stringify({
         //       full_name: payload.full_name,
@@ -126,17 +127,39 @@ export default createStore({
         //   router.push('/profile', alert("profile successfully updated"))
 
         //     },
-        update: async (context, user) => {
-          fetch("https://compify-backend.herokuapp.com/users", {
-            method: "PUT",
-            body: JSON.stringify(user),
-            headers: {
-              "Content-type": "application/json; charset=UTF-8",
-            },
-          })
-            .then((response) => response.json())
-            .then((user) => context.commit("setuser", user));
-        },
+            update: async (context, payload) => {
+            console.log(payload);
+              const {
+                full_name,
+                user_type,
+                // joined_date,
+                // phone,
+                gender,
+                // address,
+                // description,
+                // image,
+              } = payload;
+              fetch("https://compify-backend.herokuapp.com/users/" + payload.id, {
+                method: "PATCH",
+                body: JSON.stringify({
+                  full_name: full_name,
+                  user_type: user_type,
+                  // joined_date: joined_date,
+                  // phone: phone,
+                  gender: gender,
+                  // address: address,
+                  // description: description,
+                  // image: image,
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                  "x-auth-token": payload.token,
+                },
+              })
+                .then((response) => response.json())
+                .then((user) => context.commit("setUser", user[0]));
+                // router.push("/profile", alert("successfully updated profile"))
+              },
     getUsers: async (context) => {
       fetch("https://compify-backend.herokuapp.com/users")
         .then((response) => response.json())
@@ -216,57 +239,8 @@ export default createStore({
           context.commit("setProducts", data);
         });
     },
-    // addTocart: async (context, product, id) => {
-    //   console.log(context.state.user);
-    //   id = context.state.user.user_id;
-    //   console.log(product);
-    //   await fetch("https://compify-backend.herokuapp.com/users" + id + "/cart", {
-    //     method: "POST",
-    //     body: JSON.stringify(art),
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //       "x-auth-token": context.state.token,
-    //     },
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       context.dispatch("getcart", id);
-    //     });
-    // },
-    // clearcart: async (context, id) => {
-    //   id = context.state.user.user_id;
-    //   await fetch("http://localhost:7373/users/" + id + "/cart", {
-    //     method: "DELETE",
-    //     headers: {
-    //       "Content-type": "application/json; charset=UTF-8",
-    //       "x-auth-token": context.state.token,
-    //     },
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       context.dispatch("getcart", id);
-    //     });
-    // },
-    // deletecartItem: async (context, list, id) => {
-    //   id = context.state.user.user_id;
-    //   await fetch(
-    //     "http://localhost:7373/users/" + id + "/cart/" + list.cartid,
-    //     {
-    //       method: "DELETE",
-    //       headers: {
-    //         "Content-type": "application/json; charset=UTF-8",
-    //         "x-auth-token": context.state.token,
-    //       },
-    //     }
-    //   )
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //       context.dispatch("getcart", id);
-    //     });
-    // },
+    
   },
+
   plugins: [createPersistedState()]
 })
