@@ -6,24 +6,26 @@
       <span></span>
       <span></span>
       <span></span>
-      <ul id="menu">
-        <a
-          href="/home"
-          class="nav-link router-link-exact-active router-link-active"
-          target="_self"
-          aria-current="page"
-          ><li>Home</li></a
-        >
+      <ul id="menu" v-if="user">
         <a href="/products"><li>Products</li></a>
         <a class="nav-link" href="/about"><li>About</li></a>
         <a href="contact"><li>Contact</li></a>
       </ul>
+      <p v-else>SignUp</p>
     </div>
   </nav>
   </div>
   <router-view/>
 </template>
-
+<script>
+  export default {
+    computed: {
+      user() {
+        return this.$store.state.user
+      }
+    }
+  }
+</script>
 <style>
 /* Navbar */
 .nav {

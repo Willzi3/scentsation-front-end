@@ -1,15 +1,15 @@
 <template>
       <div class="container">
         <div class="profile" v-if="user">
-        <!-- <i class="fa-solid fa-user"></i><router-link to="/profile"><p>{{ user.full_name }}</p></router-link> -->
         <div class="profile-image">
            <img :src="user.image" />
          </div>
-        <div class="profile-item">{{ user.gender}}</div>
-        <div class="profile-item">{{ user.address}}</div>
-        <div class="profile-item">{{ user.description}}</div>
-        <div class="profile-item">{{ user.full_name}}</div>
+        <div class="profile-item"><h2>{{ user.gender}}</h2></div>
+        <div class="profile-item"><h2>{{ user.address}}</h2></div>
+        <div class="profile-item"><h2>{{ user.description}}</h2></div>
+        <div class="profile-item"><h2>{{ user.full_name}}</h2></div>
         <router-link to="/edit"><div class="profile-edit">Edit</div></router-link>
+        <div class="option"  @click="deleteuser(user.user_id)">Delete</div>
         <div class="profile-edit" @click="logout">Logout</div>
 
       </div>
@@ -25,7 +25,11 @@ export default {
     computed: {
     user() {
       return this.$store.state.user
-    }
+    },
+    users() {
+      return this.$store.state.users
+    },
+
   },
   mounted() {
     // this.$store.dispatch("getUser");
@@ -37,7 +41,10 @@ export default {
       this.$store.state.cart = null;
       localStorage.removeItem("users");
       this.$router.push("/");
-    }
+    },
+    deleteuser(id) {
+      return this.$store.dispatch("Deleteuser", id);
+    },
   }
 }
 </script>
@@ -50,9 +57,9 @@ export default {
     align-items: center;
 }
 .profile{
-    box-shadow: 5px 5px 5px 5px lightgrey;
+    box-shadow: 5px 5px 5px 5px black;
     border-radius: 10px;
-    height: 80%;
+    height: 90%;
     width: 80%;
     display: flex;
     flex-direction: column;
@@ -90,36 +97,48 @@ export default {
   color: none;
 }
 .profile-item{
-    border: 1px solid lightgrey;
+    background: black;
+    color: white;
     border-radius: 6px;
     width: 400px;
     font-size: 1.3rem;
     font-weight: bold;
     text-transform: uppercase;
-    height: 50px;
+    height: 70px;
 }
 .profile-image{
-    border: 1px solid lightgrey;
-    border-radius: 50%;
-    height: 200px;
-    width: 200px;
+    
+    height: 300px;
+    width: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .profile-image img{
-  border-radius: 50%;
-    height: 200px;
-    width: 200px;
+  object-fit: cover;
+  object-position: top;
+    height: 300px;
+    width: 400px;
+    border-radius: 10px;
 }
 .profile-edit{
+  border-radius: 10px;
     width: 400px;
     height: 50px;
     font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: lightgrey;
+    background: darkgray;
     color: white;
+}
+.profile-edit:hover{
+background: white;
+border: 1px solid lightgrey;
+color: black;
+cursor: pointer;
+}
+a{
+  text-decoration: none;
 }
 </style>

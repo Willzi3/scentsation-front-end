@@ -3,10 +3,9 @@
     <div v-if="products" class="prod">
        <div class="product-image">
         <img :src="products.image" />
-        <div class="info">{{ products.name}}</div>
        </div>
        <div class="product-info">
-        <h1 class="product-title">About This Product</h1>
+        <div class="info">{{ products.name}}</div>
         <div class="info">{{ products.descriptions}}</div>
         <div class="info">{{ products.price}}</div>
         <div class="info">{{ products.category}}</div>
@@ -47,7 +46,7 @@ gap: 20px;
 }
 .product-image{
     width: 45%;
-    height: 80%;
+    height: 100%;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -56,7 +55,7 @@ gap: 20px;
 }
 .product-info{
     width: 45%;
-    height: 80%;
+    height: 100%;
     border: 1px solid black;
     display: flex;
     flex-direction: column;

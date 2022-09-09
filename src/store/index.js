@@ -132,24 +132,24 @@ export default createStore({
               const {
                 full_name,
                 user_type,
-                // joined_date,
-                // phone,
+                joined_date,
+                phone,
                 gender,
-                // address,
-                // description,
-                // image,
+                address,
+                description,
+                image,
               } = payload;
               fetch("https://compify-backend.herokuapp.com/users/" + payload.id, {
                 method: "PATCH",
                 body: JSON.stringify({
                   full_name: full_name,
                   user_type: user_type,
-                  // joined_date: joined_date,
-                  // phone: phone,
+                  joined_date: joined_date,
+                  phone: phone,
                   gender: gender,
-                  // address: address,
-                  // description: description,
-                  // image: image,
+                  address: address,
+                  description: description,
+                  image: image,
                 }),
                 headers: {
                   "Content-type": "application/json; charset=UTF-8",
@@ -158,7 +158,7 @@ export default createStore({
               })
                 .then((response) => response.json())
                 .then((user) => context.commit("setUser", user[0]));
-                // router.push("/profile", alert("successfully updated profile"))
+                router.push("/profile", alert("successfully updated profile"))
               },
     getUsers: async (context) => {
       fetch("https://compify-backend.herokuapp.com/users")
@@ -186,11 +186,11 @@ export default createStore({
       }).then((product) => context.commit("setProduct", product));
       this.router.push("/admin")
     },
-    // Deleteuser: async (context, id) => {
-    //   fetch("http://localhost:7373/users/" + id, {
-    //     method: "DELETE",
-    //   }).then((user) => context.commit("setusers", user));
-    // },
+    Deleteuser: async (context, id) => {
+      fetch("https://compify-backend.herokuapp.com/users/" + id, {
+        method: "DELETE",
+      }).then((user) => context.commit("setUsers", user));
+    },
     // Addproduct: async (context, product) => {
     //   fetch("https://compify-backend.herokuapp.com/products/", {
     //     method: "POST",

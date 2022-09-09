@@ -1,11 +1,11 @@
 <template>
-    <!-- <router-link class="user_box" :to="{ name: 'ProductDetails', params: { id: product.product_id } }"> -->
-      <div class="card">
-        <!-- <img class="product_img" :src="product.image" /> -->
-        <p class="user_name">{{ user.full_name }}</p>
-        <p class="user_email">{{ user.email }}</p>
-      </div>
-    <!-- </router-link> -->
+    <router-link class="user_box" :to="{ name: 'UserOptions', params: { id: user.user_id } }">
+      <tr>
+        <td><img class="user_img" :src="user.image" /></td>
+        <td>{{user.full_name}}</td>
+        
+      </tr>
+    </router-link>
   </template>
   <script>
   export default {
@@ -13,5 +13,14 @@
   };
   </script>
   <style scoped>
-  
+ tr{
+      width: 800px;
+      height: 50px;
+      border: 1px solid black;
+    }
+ .user_img{
+  width: 50px;
+  height: 50px;
+  border: 1px solid black;
+ }
   </style>

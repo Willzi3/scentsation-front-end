@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="container" v-if="user.user_type === 'Admin'">
     <div class="row">
         <div v-if="products" class="prods">
      <productCard
@@ -17,6 +17,11 @@
      </div>
     </div>
     </div>
+    <div class="form" v-else-if="user.user_type === 'user'">
+      <div class="error"><h1>Access Denied!</h1></div>
+      
+    </div>
+    <div v-else>Login</div>
    </template>
    <script>
     
@@ -30,6 +35,9 @@
        users() {
          return this.$store.state.users
        },
+       user() {
+         return this.$store.state.user
+       }
      },
 
      components: { userCard,
@@ -42,30 +50,50 @@
    </script>
    <style scoped>
    .container{
-     margin: 10px;
+     width: 100vw;
+     height: 100vh;
    }
    .prods{
-     background: grey;
-     border-radius: 10px;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     margin: 5%;
-     gap: 10px;
-     padding: 20px;
-     width: 50%;
-     height: 40%;
-
-   }
-   .prods a {
-     text-decoration: none;
-     color: black;
-     font-weight: bold;
-   }
-   .row{
-    width: 100%;
+    border: 1px solid black;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+   }
+   .form{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   }
+   form{
+  background: black;
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+  gap: 20px;
+}
+.form-input{
+  width: 70%;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: 50px;
+}
+.form-btn{
+  width: 70%;
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+}
+   .error h1{
+    font-size: 4.5rem;
    }
    </style>
    

@@ -2,7 +2,7 @@
 
     <div class="container">
       <form @submit.prevent="addProduct">
-        <h3>Register</h3>
+        <h3>Add Product</h3>
             <input class="form-input" type="text" name="name" required v-model="name" placeholder="Full Name"/>
             <input class="form-input" type="text" name="price" required v-model="price" placeholder="Email:"/>
             <input class="form-input" type="text" name="descriptions" required v-model="descriptions" placeholder="Password:"/>
@@ -11,10 +11,6 @@
             <input class="form-input" type="text" name="created_date" required v-model="created_date" placeholder="Gender:"/>
             <input class="form-input" type="text" name="stock" required v-model="stock" placeholder="Address:"/>
             <input class="form-btn" type="submit" value="Add" />
-            <hr>
-            <div class="form-extra">
-              <router-link to="/"><p>Already have an Account</p></router-link>
-            </div>
       </form>
   
       
@@ -63,28 +59,29 @@
     align-items: center;
   }
   form{
-    border: 1px solid black;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: 400px;
-    gap: 10px;
-  }
-  .form-input{
-    width: 200px;
-    border: 1px solid lightgrey;
-    border-radius: 5px;
-    height: 30px;
-  }
-  .form-btn{
-    width: 208px;
-    border: none;
-    border-radius: 5px;
-    height: 30px;
-  }
+  background: black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 700px;
+  gap: 20px;
+  color: white;
+}
+.form-input{
+  width: 70%;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: 50px;
+}
+.form-btn{
+  width: 70%;
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+}
   .form-extra{
     display: flex;
     gap: 10px;

@@ -1,7 +1,7 @@
 <template>
- <div class="container">
+ <div class="container" v-if="user">
   <form class="filters">
-    <button @click="sort">Sort</button>
+    <button @click="sort" class="inp">Sort</button>
     <select name="" class="inp" v-model="category">
         <label>Sort By Catergory</label>
         <option value="All" selected>All</option>
@@ -36,6 +36,7 @@
 
   </div>
  </div>
+ <div v-else>Login</div>
 </template>
 <script>
 import Card from "../components/Card.vue";
@@ -44,7 +45,9 @@ export default {
     return{
       search: "",
       price: "All",
-      category: "All"
+      category: "All",
+      email: "",
+      password: "",
     }
   },
   computed: {
@@ -67,7 +70,15 @@ export default {
   methods: {
 sort() {
   this.$store.commit("sortByPrice");
-}
+},
+login() {
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password,
+      });
+      router.push("/admin")
+    },
+
   },
   components: { Card },
   mounted() {
@@ -78,10 +89,15 @@ sort() {
 </script>
 <style scoped>
 .container{
-  margin: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
 .prods{
-  background: grey;
+  width: 90%;
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -97,13 +113,13 @@ sort() {
   font-weight: bold;
 }
 .filters{
-  background: lightgrey;
+  background: black;
   border-radius: 10px;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-inline: 8%;
+  
   margin-bottom: -70px;
   gap: 10px;
 }
@@ -112,14 +128,30 @@ sort() {
   justify-content: space-evenly;
   align-items: center;
   border: 1px solid black;
-  width: 270px;
+  border-radius: 6px;
+  width: 300px;
+}
+a{
+  text-decoration: none;
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
 }
 .cart{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  border: 1px solid black;
+  border-radius: 6px;
   width: 150px;
+}
+.inp{
+  border: none;
+  height: 50px;
+  border-radius: 6px;
+  background: white;
+}
+form button{
+  width: 200px;
 }
 </style>
 

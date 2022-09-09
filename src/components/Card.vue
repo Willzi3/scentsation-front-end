@@ -14,10 +14,11 @@ export default {
 </script>
 <style scoped>
 .card{
-   background: white;
+   box-shadow: 5px 5px 5px 5px black;
+   color: black;
     border-radius: 10px;
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 350px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,8 +27,8 @@ export default {
 }
 
 .product_img{
-    height: 130px;
-    width: 130px;
+    height: 200px;
+    width: 200px;
 }
 .product_price{
   margin: none;
