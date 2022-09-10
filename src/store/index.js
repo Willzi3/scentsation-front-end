@@ -9,7 +9,7 @@ export default createStore({
     token: null,
     product: null,
     products: null,
-    cart: null,
+    cart: [],
     asc: true
   },
   mutations: {
@@ -224,9 +224,14 @@ export default createStore({
       
 
         },
-    getCart: async (context, id) => {
+   //cart
+   getcart: (context, id) => {
+    if (context.state.user === null) {
+      alert("Please Login");
+    } else {
       id = context.state.user.user_id;
-      await fetch("https://compify-backend.herokuapp.com/users" + id + "/cart", {
+      fetch("https://model-madness.herokuapp.com/users/" + id + "/cart", {
+        // fetch("https://model-madness.herokuapp.com/users/" + id + "/cart", {
         method: "GET",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -235,11 +240,50 @@ export default createStore({
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          context.commit("setProducts", data);
+          // console.log(data)
+          context.commit("setcart", data);
         });
-    },
-    
+    }
+  },
+
+  addTocart: async (context, product, id) => {
+    console.log(product.product_id);
+    id = context.state.user.user_id;
+    // console.log(product);
+    await fetch("https://model-madness.herokuapp.com/users/" + id + "/cart", {
+      // await fetch("https://model-madness.herokuapp.com/users/" + id + "/cart", {
+      method: "POST",
+      body: JSON.stringify({
+        product_id: product.product_id,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+        "x-auth-token": context.state.token,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        context.dispatch("getcart", id);
+      });
+  },
+  deleteFromCart: async (context, id) => {
+    const newCart = context.state.cart.filter((product) => product.id != id);
+    swal({
+      title: "Are you sure you want to remove this item?",
+      text: "",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Removed from cart", {
+          icon: "success",
+        });
+      }
+    });
+    context.commit("removeFromCart", newCart);
+  },
   },
 
   plugins: [createPersistedState()]

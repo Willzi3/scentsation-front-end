@@ -33,5 +33,20 @@ a{
   padding: 10px;
   
 }
-
+@media (min-width: 300px) and (max-width: 400px) {
+ footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+}
+@media (min-width: 200px) and (max-width: 300px) {
+ footer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+ }
+}
 </style>

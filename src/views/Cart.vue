@@ -1,13 +1,17 @@
 <template>
-  <h1>Cart</h1>
+  <div class="Cart">
+    <Cart />
+  </div>
 </template>
 
 <script>
+import Cart from "@/components/Cart.vue";
 export default {
-   
-}
+  name: "CartView",
+  components: {
+    Cart,
+  },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

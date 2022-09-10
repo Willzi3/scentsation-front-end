@@ -97,4 +97,34 @@ hr{
   
 
 }
+@media (min-width: 300px) and (max-width: 400px) {
+  .form-input{
+    width: 170px;
+  }
+  .form-btn{
+    width: 170px;
+  }
+  .form-extra{
+    display: flex;
+    flex-direction: column;
+  }
+  form{
+    width: 400px;
+  }
+}
+@media (min-width: 200px) and (max-width: 300px) {
+  .form-input{
+    width: 140px;
+  }
+  .form-btn{
+    width: 140px;
+  }
+  .form-extra{
+    display: flex;
+    flex-direction: column;
+  }
+  form{
+    width: 350px;
+  }
+}
 </style>
