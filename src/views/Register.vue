@@ -12,7 +12,7 @@
           <input class="form-input" type="text" name="address" required v-model="address" placeholder="Address:"/>
           <input class="form-input" type="text" name="description" required v-model="description" placeholder="Description:"/>
           <input class="form-input" type="text" name="image" required v-model="image" placeholder="Image:"/>
-          <input class="form-input" type="text" name="user_type" required v-model="user_type" placeholder="User Type:" readonly/>
+          <input class="user-type" type="text" name="user_type" required v-model="user_type" placeholder="User Type:" readonly/>
           <input class="form-btn" type="submit" value="Register" />
           <hr>
           <div class="form-extra">
@@ -76,27 +76,28 @@ export default {
   align-items: center;
 }
 form{
-  border: 1px solid black;
+  background: black;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 400px;
-  gap: 10px;
+  width: 500px;
+  height: 650px;
+  gap: 20px;
+  color: white;
 }
 .form-input{
-  width: 200px;
-  border: 1px solid lightgrey;
+  width: 70%;
+  border: 1px solid lightgray;
   border-radius: 5px;
-  height: 30px;
+  height: 50px;
 }
 .form-btn{
-  width: 208px;
+  width: 70%;
   border: none;
   border-radius: 5px;
-  height: 30px;
+  height: 50px;
 }
 .form-extra{
   display: flex;

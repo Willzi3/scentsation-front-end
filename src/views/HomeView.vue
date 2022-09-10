@@ -98,11 +98,16 @@ hr{
 
 }
 @media (min-width: 300px) and (max-width: 400px) {
+  .container{
+    height: 80vh;
+  }
   .form-input{
     width: 170px;
+    height: 30px;
   }
   .form-btn{
     width: 170px;
+     height: 30px;
   }
   .form-extra{
     display: flex;
@@ -110,6 +115,9 @@ hr{
   }
   form{
     width: 400px;
+  }
+  h3{
+    display: none;
   }
 }
 @media (min-width: 200px) and (max-width: 300px) {
