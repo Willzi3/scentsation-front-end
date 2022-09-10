@@ -40,6 +40,9 @@ export default {
 }
 .form{
     width: 45%;
+     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .form-input{
     width: 300px;
@@ -60,5 +63,85 @@ form{
 }
 .location{
     width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media (min-width: 300px) and (max-width: 1200px) {
+  .form form{
+    width: 380px;
+    height: 380px;
+  }
+  .location iframe{
+    width: 380px;
+    height: 380px;
+  }
+}
+@media (min-width: 300px) and (max-width: 1000px) {
+  .row{
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .form form{
+    width: 350px;
+    height: 350px;
+  }
+  .location iframe{
+    width: 350px;
+    height: 350px;
+  }
+   .form-input{
+    width: 250px;
+    height: 30px;
+   
+}
+}
+@media (min-width: 300px) and (max-width: 900px) {
+  .row{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .form form{
+    width: 300px;
+    height: 300px;
+  }
+  .location iframe{
+    width: 350px;
+    height: 300px;
+  }
+  .form-input{
+    width: 300px;
+    height: 30px;
+   
+}
+}
+@media (min-width: 200px) and (max-width: 350px) {
+  .row{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .form form{
+    width: 280px;
+    height: 280px;
+    padding: 10px;
+  }
+  .location iframe{
+   width: 280px;
+    height: 280px;
+  }
+  .form-input{
+    width: 280px;
+    height: 30px;
+   
+}
 }
 </style>
