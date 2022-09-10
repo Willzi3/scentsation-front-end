@@ -107,7 +107,7 @@
 #menuToggle input:checked ~ span {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
+  background: white;
 }
 /*
 * But let's hide the middle one.
@@ -133,7 +133,7 @@
   margin: -100px 0 0 -50px;
   padding: 50px;
   padding-top: 125px;
-  background: grey;
+  background: black;
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
